@@ -23,7 +23,7 @@ public class MainProgram extends Application {
             }
             scanner.close();
         });
-
+        //d
         VBox vbox = new VBox(10, input);
         root.getChildren().addAll(input);
         stage1.setScene(scene1);
