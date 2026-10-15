@@ -1,7 +1,10 @@
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
@@ -14,7 +17,9 @@ public class MainProgram extends Application {
         StackPane root = new StackPane();
         Scene scene1 = new Scene(root, 1028, 1028);
         input.setPromptText("Type your text here...");
-        input.setMaxWidth(250);
+        input.setPrefSize(250,25);
+        input.setMaxSize(250,25);
+        input.setFont(Font.font("Arial", FontWeight.BOLD,25));
         input.setOnAction(event -> {
             String text = input.getText();
             Scanner scanner = new Scanner(text);
@@ -25,6 +30,7 @@ public class MainProgram extends Application {
         });
         VBox vbox = new VBox(10, input);
         root.getChildren().addAll(input);
+        StackPane.setAlignment(input, Pos.TOP_LEFT);
         stage1.setScene(scene1);
         stage1.show();
     }
