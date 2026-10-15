@@ -13,8 +13,8 @@ public class MainProgram extends Application {
         TextField input = new TextField();
         StackPane root = new StackPane();
         Scene scene1 = new Scene(root, 1028, 1028);
-        input.setPromptText("Type your text here..."); // Visible placeholder text
-        input.setMaxWidth(250); // Gives it a nice, clean width
+        input.setPromptText("Type your text here...");
+        input.setMaxWidth(250);
         input.setOnAction(event -> {
             String text = input.getText();
             Scanner scanner = new Scanner(text);
@@ -23,7 +23,6 @@ public class MainProgram extends Application {
             }
             scanner.close();
         });
-        //d
         VBox vbox = new VBox(10, input);
         root.getChildren().addAll(input);
         stage1.setScene(scene1);
