@@ -1,6 +1,10 @@
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -13,26 +17,29 @@ import java.util.Scanner;
 public class MainProgram extends Application {
     @Override
     public void start(Stage stage1) throws Exception {
-        TextField input = new TextField();
-        StackPane root = new StackPane();
-        Scene scene1 = new Scene(root, 1028, 1028);
-        input.setPromptText("Type your text here...");
-        input.setPrefSize(250,25);
-        input.setMaxSize(250,25);
-        input.setFont(Font.font("Arial", FontWeight.BOLD,25));
-        input.setOnAction(event -> {
-            String text = input.getText();
-            Scanner scanner = new Scanner(text);
-            if (scanner.hasNextLine()){
-                System.out.println(scanner.nextLine());
-            }
-            scanner.close();
-        });
-        VBox vbox = new VBox(10, input);
-        root.getChildren().addAll(input);
-        StackPane.setAlignment(input, Pos.TOP_LEFT);
+        TextArea outputArea = new TextArea();
+        outputArea.setEditable(false);
+
+        TextField inputArea = new TextField();
+        inputArea.getStyleClass().add("inputArea");
+
+        VBox terminalLayout = new VBox(outputArea, inputArea);
+
+        VBox.setVgrow(outputArea, Priority.ALWAYS);
+
+        Scene scene1 = new Scene(terminalLayout, 600, 400);
+        String cssPath = getClass().getResource("style.css").toExternalForm();
+        scene1.setCursor(Cursor.NONE);
+
+        scene1.getStylesheets().add(cssPath);
         stage1.setScene(scene1);
         stage1.show();
+        inputArea.requestFocus();
+        outputArea.focusedProperty().addListener((obs, oldval, newVal) -> {
+            if (newVal) {
+                inputArea.requestFocus();
+            }
+        });
     }
     public static void main(String[] args) {
         launch(args);

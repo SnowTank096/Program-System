@@ -1,0 +1,8 @@
+
+.inputArea:focused {
+    -fx-text-box-border: transparent;
+    -fx-background-color: -fx-control-inner-background;
+}
+.text-area {
+    -fx-control-liner
+}
