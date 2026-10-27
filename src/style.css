@@ -1,8 +1,27 @@
 
-.inputArea:focused {
+.inputArea {
+    -fx-border-color: transparent;
     -fx-text-box-border: transparent;
     -fx-background-color: -fx-control-inner-background;
 }
-.text-area {
-    -fx-control-liner
+.inputArea:focused .content {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent, -fx-control-inner-background;
+    -fx-background-color: transparent, white;
 }
+.outputArea {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+}
+
+.outputArea .viewport {
+    -fx-background-color: transparent;
+}
+.outputText {
+    -fx-fill: black;
+    -fx-font-family: "System";
+    -fx-font-size: 12px;
+}
+
