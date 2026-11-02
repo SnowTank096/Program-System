@@ -3,6 +3,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -22,14 +23,9 @@ public class MainProgram extends Application {
 
         javafx.scene.text.Text outputText =  new javafx.scene.text.Text();
 
-        javafx.scene.text.TextFlow textFlow = new javafx.scene.text.TextFlow(outputText);
-
-        javafx.scene.control.ScrollPane outputArea = new javafx.scene.control.ScrollPane(textFlow);
+        javafx.scene.text.TextFlow outputArea = new javafx.scene.text.TextFlow(outputText);
 
 
-        outputArea.setFitToWidth(true);
-        outputArea.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        outputArea.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         outputArea.getStyleClass().add("outputArea");
 
         outputArea.setVisible(false);
@@ -44,19 +40,21 @@ public class MainProgram extends Application {
                 inputArea.requestFocus();
             }
         });
+        outputText.getStyleClass().add("outputText");
         inputArea.setOnKeyPressed(event -> {
-            event.consume();
             if (event.getCode() == KeyCode.ENTER){
+                event.consume();
+                outputText.setText("   "+inputArea.getText().trim());
                 System.out.println(inputArea.getText());
+                inputArea.clear();
                 outputArea.setVisible(true);
                 outputArea.setManaged(true);
-                outputText.setText(inputArea.getText());
-                inputArea.clear();
+
             }
         });
-        VBox terminalLayout = new VBox(outputText,inputArea);
+        VBox terminalLayout = new VBox(outputArea,inputArea);
         VBox.setVgrow(inputArea, Priority.ALWAYS);
-        Scene scene1 = new Scene(terminalLayout, 600, 400);
+        Scene scene1 = new Scene(terminalLayout, 2040, 1080);
         String cssPath = getClass().getResource("style.css").toExternalForm();
         scene1.setCursor(Cursor.NONE);
 

@@ -1,27 +1,33 @@
 
 .inputArea {
-    -fx-border-color: transparent;
-    -fx-text-box-border: transparent;
-    -fx-background-color: -fx-control-inner-background;
+    -fx-border-color: black;
+    -fx-background-color: black;
+    -fx-text-fill: #3EFF00;
+    -fx-font-family: "3270font";
+    -fx-font-size: 100px;
 }
 .inputArea:focused .content {
-    -fx-border-color: transparent;
-    -fx-background-color: transparent, -fx-control-inner-background;
-    -fx-background-color: transparent, white;
+    -fx-border-color: black;
+    -fx-background-color: black;
+    -fx-fill: #3EFF00;
 }
 .outputArea {
-    -fx-background-color: transparent;
+    -fx-fill: #3EFF00;
+    -fx-background-color: black;
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-border-color: transparent;
+    -fx-border-color: black;
+
 }
 
 .outputArea .viewport {
-    -fx-background-color: transparent;
+    -fx-fill: #3EFF00;
+    -fx-background-color: black;
+
 }
 .outputText {
-    -fx-fill: black;
-    -fx-font-family: "System";
-    -fx-font-size: 12px;
+    -fx-fill: #3EFF00;
+    -fx-font-family: "3270font";
+    -fx-font-size: 100px;
 }
 
