@@ -3,7 +3,7 @@
     -fx-border-color: black;
     -fx-background-color: black;
     -fx-text-fill: #3EFF00;
-    -fx-font-family: "3270font";
+    -fx-font-family: "IBM 3270";
     -fx-font-size: 100px;
 }
 .inputArea:focused .content {
@@ -27,7 +27,7 @@
 }
 .outputText {
     -fx-fill: #3EFF00;
-    -fx-font-family: "3270font";
+    -fx-font-family: "IBM 3270";
     -fx-font-size: 100px;
 }
 

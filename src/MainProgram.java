@@ -1,3 +1,5 @@
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -13,6 +15,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 
 import java.util.Scanner;
 
@@ -44,12 +47,27 @@ public class MainProgram extends Application {
         inputArea.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER){
                 event.consume();
-                outputText.setText("   "+inputArea.getText().trim());
+                String text = inputArea.getText().trim();
                 System.out.println(inputArea.getText());
                 inputArea.clear();
                 outputArea.setVisible(true);
                 outputArea.setManaged(true);
+                outputText.setText(" ");
 
+                Timeline animation1 = new Timeline();
+
+                Duration delay = Duration.millis(60);
+                for(int i = 0; i < text.length(); i++)
+                {
+                    final int index = i;
+                    KeyFrame frame = new KeyFrame(
+                            delay.multiply(index + 1),
+                            e -> outputText.setText(outputText.getText() + text.charAt(index))
+
+                    );
+                    animation1.getKeyFrames().add(frame);
+                }
+                animation1.play();
             }
         });
         VBox terminalLayout = new VBox(outputArea,inputArea);
