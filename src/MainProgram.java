@@ -1,6 +1,7 @@
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
@@ -12,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -20,11 +22,12 @@ import javafx.util.Duration;
 import java.util.Scanner;
 
 public class MainProgram extends Application {
+    static Text outputText =  new javafx.scene.text.Text();
     @Override
     public void start(Stage stage1) throws Exception {
 
 
-        javafx.scene.text.Text outputText =  new javafx.scene.text.Text();
+
 
         javafx.scene.text.TextFlow outputArea = new javafx.scene.text.TextFlow(outputText);
 
@@ -33,6 +36,7 @@ public class MainProgram extends Application {
 
         outputArea.setVisible(false);
         outputArea.setManaged(false);
+        outputArea.setPadding(new Insets(0,0,0,20));
 
         TextArea inputArea = new TextArea();
         inputArea.getStyleClass().add("inputArea");
@@ -47,27 +51,13 @@ public class MainProgram extends Application {
         inputArea.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER){
                 event.consume();
-                String text = inputArea.getText().trim();
+                commands(inputArea.getText().trim());
                 System.out.println(inputArea.getText());
                 inputArea.clear();
                 outputArea.setVisible(true);
                 outputArea.setManaged(true);
-                outputText.setText(" ");
+                outputText.setText("");
 
-                Timeline animation1 = new Timeline();
-
-                Duration delay = Duration.millis(60);
-                for(int i = 0; i < text.length(); i++)
-                {
-                    final int index = i;
-                    KeyFrame frame = new KeyFrame(
-                            delay.multiply(index + 1),
-                            e -> outputText.setText(outputText.getText() + text.charAt(index))
-
-                    );
-                    animation1.getKeyFrames().add(frame);
-                }
-                animation1.play();
             }
         });
         VBox terminalLayout = new VBox(outputArea,inputArea);
@@ -83,5 +73,47 @@ public class MainProgram extends Application {
     }
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void displayText(String text)
+    {
+
+        Timeline animation1 = new Timeline();
+
+        Duration delay = Duration.millis((double) 1000/text.length());
+        for(int i = 0; i < text.length(); i++)
+        {
+            final int index = i;
+            KeyFrame frame = new KeyFrame(
+                    delay.multiply(index + 1),
+                    e -> outputText.setText(outputText.getText() + text.charAt(index))
+
+            );
+            animation1.getKeyFrames().add(frame);
+        }
+        animation1.play();
+    }
+
+    public static void commands(String text)
+    {
+        text = text.toLowerCase();
+
+        if (text.equals("help"))
+        {
+            displayText("Valid commands include:\nhelp\nmath");
+        } else
+        if (text.equals("math"))
+        {
+            math();
+        } else
+        {
+            displayText("Please enter a valid command or type help for valid commands.");
+        }
+
+    }
+
+    public static void math()
+    {
+        displayText("Please enter the equation:");
     }
 }
